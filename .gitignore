@@ -3,4 +3,6 @@
 
 # But not leagues.js or gitignore
 !.gitignore
-!leaderboard.js
+!games.js
+!leagues-dir.js
+!leagues.js
