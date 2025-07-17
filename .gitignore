@@ -1,8 +1,10 @@
 # Ignore everything
 *
 
-# But not leagues.js or gitignore
+# Except the following
 !.gitignore
 !games.js
 !leagues-dir.js
 !leagues.js
+!leaderboard.js
+!README-leaderboard.md
