@@ -17,8 +17,11 @@ data-leaderboard="wrapper"
 An element containing the JSON data must be present inside the wrapper:
 
 The element with a class of .leaderboard_json should have its text set to the Leaderboard JSON CMS field.
+And it should have the following attribute:
 
-### Template Element (Optional)
+data-leaderboard="json"
+
+### Template Element
 
 The template element should have this attribute (it will be automatically removed):
 
