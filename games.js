@@ -367,7 +367,7 @@ function initAdmin() {
     })
     .catch((error) => {
       console.error("Error during initialization:", error);
-      hideAdminSection();
+      showAdminSection(false);
     });
 }
 
@@ -389,7 +389,7 @@ function checkMemberStatus() {
   return window.$memberstackDom.getCurrentMember().then((member) => {
     if (!member.data) {
       // console.log("No member logged in");
-      hideAdminSection();
+      showAdminSection(false);
       return false;
     }
 
@@ -401,7 +401,7 @@ function checkMemberStatus() {
     if (hasAdminPlan) {
       return true;
     } else {
-      hideAdminSection();
+      showAdminSection(false);
       return false;
     }
   });
