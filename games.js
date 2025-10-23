@@ -30,7 +30,9 @@ function initializeApp() {
 
 const disableFormWhileSubmitting = () => {
   const form = document.getElementById("email-form");
-  const submitButton = form.querySelector('input[type="submit"]');
+  if (!form) return;
+  const submitButton = form.querySelector("input[type='submit']");
+  if (!submitButton) return;
 
   form.addEventListener("submit", function () {
     // Disable the button to prevent multiple clicks
