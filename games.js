@@ -1,10 +1,19 @@
 // important that var gameClosed is set in a separate script above this one
-//
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeApp();
   initializeAdminFeatures();
 });
+
+// Also listen for memberstack.ready in case it fires after DOM
+if (!window.$memberstackReady) {
+  document.addEventListener("memberstack.ready", () => {
+    if (document.readyState !== "loading") {
+      initializeApp();
+      initializeAdminFeatures();
+    }
+  });
+}
 
 // Game Status Management Functions
 function initializeApp() {
@@ -13,19 +22,12 @@ function initializeApp() {
   const gameStatus = getGameStatus(currentDate);
   console.log("gameStatus check:", gameStatus);
   updateVisibility(gameStatus);
+  handleMemberstackData(gameStatus);
   gameAutoRefresh(gameStatus);
   disableFormWhileSubmitting();
   // optional - debugging
   displayHelperData(gameStatus, currentDate);
   //logData(gameStatus, currentDate);
-  // Initialize when Memberstack is ready
-  if (window.$memberstackReady) {
-    handleMemberstackData(gameStatus);
-  } else {
-    window.$memberstackDom?.addEventListener("memberstackReady", () =>
-      handleMemberstackData(gameStatus)
-    );
-  }
 }
 
 const disableFormWhileSubmitting = () => {
@@ -311,13 +313,7 @@ function initializeAdminFeatures() {
   // Initialize form inputs with current values
   initializeFormInputs();
   toggleLoader(false);
-
-  // Initialize when Memberstack is ready
-  if (window.$memberstackReady) {
-    initAdmin();
-  } else {
-    window.$memberstackDom?.addEventListener("memberstackReady", initAdmin);
-  }
+  initAdmin();
 }
 
 // Initialize form inputs with current values
