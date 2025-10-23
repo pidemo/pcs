@@ -15,10 +15,28 @@ function initializeApp() {
   updateVisibility(gameStatus);
   handleMemberstackData(gameStatus);
   gameAutoRefresh(gameStatus);
+  disableFormWhileSubmitting();
   // optional - debugging
   displayHelperData(gameStatus, currentDate);
   //logData(gameStatus, currentDate);
 }
+
+const disableFormWhileSubmitting = () => {
+  const form = document.getElementById("email-form");
+  const submitButton = form.querySelector('input[type="submit"]');
+
+  form.addEventListener("submit", function () {
+    // Disable the button to prevent multiple clicks
+    submitButton.disabled = true;
+
+    // Apply visual changes
+    submitButton.style.pointerEvents = "none";
+    submitButton.style.opacity = "0.6";
+
+    // Optional: Change the button text to show it's processing
+    submitButton.value = "Submitting...";
+  });
+};
 
 // Function to get date from element by ID
 const getDate = (id) => {
