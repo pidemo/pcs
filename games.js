@@ -13,12 +13,19 @@ function initializeApp() {
   const gameStatus = getGameStatus(currentDate);
   console.log("gameStatus check:", gameStatus);
   updateVisibility(gameStatus);
-  handleMemberstackData(gameStatus);
   gameAutoRefresh(gameStatus);
   disableFormWhileSubmitting();
   // optional - debugging
   displayHelperData(gameStatus, currentDate);
   //logData(gameStatus, currentDate);
+  // Initialize when Memberstack is ready
+  if (window.$memberstackReady) {
+    handleMemberstackData(gameStatus);
+  } else {
+    window.$memberstackDom?.addEventListener("memberstackReady", () =>
+      handleMemberstackData(gameStatus)
+    );
+  }
 }
 
 const disableFormWhileSubmitting = () => {
